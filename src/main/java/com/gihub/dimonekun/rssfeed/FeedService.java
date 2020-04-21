@@ -13,7 +13,6 @@ import reactor.core.publisher.Flux;
 
 import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Map;
 
 @Service
@@ -46,12 +45,11 @@ public class FeedService {
         });
     }
 
-    public void registerFeed(final FeedConfig feedConfig) throws MalformedURLException {
-        final URL feedUrl = new URL(feedConfig.getUri());
+    public void registerFeed(final FeedConfig feedConfig){
 
         flowContext.registration(IntegrationFlows
                 .from(
-                        Feed.inboundAdapter(feedUrl, "rss"),
+                        Feed.inboundAdapter(feedConfig.getUri(), "rss"),
                         e -> e.poller(p -> p.fixedDelay(feedConfig.getDelay() != null ? feedConfig.getDelay() : 1000))
                 )
                 .channel(feedChannel)

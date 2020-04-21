@@ -1,14 +1,16 @@
 package com.gihub.dimonekun.rssfeed.config;
 
+import java.net.URL;
+
 public class FeedConfig {
-    String uri;
+    URL uri;
     Long delay;
 
-    public String getUri() {
+    public URL getUri() {
         return uri;
     }
 
-    public void setUri(String uri) {
+    public void setUri(URL uri) {
         this.uri = uri;
     }
 
